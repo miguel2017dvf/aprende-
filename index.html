@@ -1,0 +1,681 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aprende+ | Plataforma de Tutoriais</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0f0f0f;--panel:#202020;--panel2:#292929;
+  --text:#f4f4f4;--muted:#aaa;--red:#ff3030;
+}
+body{background:var(--bg);color:var(--text);font-family:Arial,sans-serif}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+header{
+  height:68px;background:#151515;position:sticky;top:0;
+  z-index:10;display:flex;align-items:center;gap:18px;
+  padding:0 4%;border-bottom:1px solid #303030
+}
+.logo{font-size:23px;font-weight:bold;white-space:nowrap}
+.logo span{background:var(--red);padding:6px 9px;border-radius:8px}
+.search{display:flex;flex:1;max-width:550px;margin:auto}
+.search input{
+  flex:1;min-width:0;padding:12px 16px;border-radius:25px 0 0 25px;
+  border:1px solid #444;background:#222;color:white;outline:none
+}
+.search button{padding:0 18px;background:#333;color:white;border:1px solid #444;border-radius:0 25px 25px 0}
+header .profile{background:#303030;border:0;color:white;padding:10px 14px;border-radius:20px}
+.layout{display:grid;grid-template-columns:205px 1fr;max-width:1600px;margin:auto}
+aside{padding:20px 12px;border-right:1px solid #292929;min-height:90vh}
+aside button{
+  display:block;width:100%;text-align:left;background:none;color:white;
+  border:0;padding:13px;border-radius:9px;margin-bottom:5px
+}
+aside button:hover,aside button.active{background:#303030}
+main{padding:26px 3%;min-width:0}
+.banner{
+  background:linear-gradient(110deg,#871b1b,#282020 65%,#242424);
+  padding:38px;border-radius:16px;margin-bottom:30px
+}
+.banner h1{font-size:clamp(27px,4vw,43px);margin-bottom:12px}
+.banner p{color:#ddd;line-height:1.5}
+h2{font-size:22px;margin:27px 0 17px}
+h3{font-size:17px}
+.muted{color:var(--muted)}
+.featured,.panel{
+  background:var(--panel);padding:17px;border-radius:14px;
+  border:1px solid #333;margin-bottom:25px
+}
+video{width:100%;max-height:550px;background:#000;border-radius:10px}
+.featured h3{margin:12px 0}
+.featured p{color:var(--muted)}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.btn{
+  background:#343434;color:white;border:0;border-radius:8px;
+  padding:10px 15px
+}
+.btn:hover{background:#484848}
+.btn.red{background:var(--red)}
+.btn.red:hover{background:#d92121}
+.btn.active{background:#792222}
+.categories{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:22px}
+.categories button{
+  border:0;border-radius:20px;padding:10px 16px;
+  background:#303030;color:white
+}
+.categories button.active,.categories button:hover{background:white;color:#111}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px 16px}
+.card{background:#202020;padding:11px;border-radius:12px;cursor:pointer;min-width:0}
+.card:hover{background:#303030}
+.thumb{
+  width:100%;aspect-ratio:16/9;border-radius:9px;
+  background:linear-gradient(135deg,#493333,#202020);
+  display:grid;place-items:center;font-size:48px;
+  overflow:hidden;margin-bottom:12px
+}
+.thumb video{width:100%;height:100%;object-fit:cover}
+.card h3{font-size:15px;line-height:1.4;margin-bottom:7px}
+.card p{font-size:12px;color:#aaa}
+.empty{padding:30px;text-align:center;color:#aaa}
+.form{display:grid;gap:12px;max-width:600px}
+.form input,.form select,.form textarea{
+  width:100%;padding:12px;background:#151515;color:white;
+  border:1px solid #444;border-radius:8px
+}
+.form textarea{min-height:90px;resize:vertical}
+.form label{font-size:13px;color:#ccc}
+.hidden{display:none!important}
+.comments{margin-top:24px;border-top:1px solid #444;padding-top:20px}
+.comment{background:#292929;padding:12px;border-radius:8px;margin-top:10px}
+.comment strong{display:block;margin-bottom:5px}
+.comment p{color:#ddd;white-space:pre-wrap;overflow-wrap:anywhere}
+.account{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.avatar{width:40px;height:40px;background:#8d2727;border-radius:50%;display:grid;place-items:center;font-weight:bold}
+.notice{padding:12px;background:#272727;border-radius:8px;color:#ccc;margin:12px 0;font-size:13px}
+footer{text-align:center;padding:28px;color:#888;border-top:1px solid #333;margin-top:40px}
+@media(max-width:900px){
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .layout{grid-template-columns:75px 1fr}
+ aside button{text-align:center;font-size:0}
+ aside button span{font-size:20px}
+}
+@media(max-width:560px){
+ header{padding:0 10px;gap:8px}
+ .logo{font-size:17px}
+ header .profile{font-size:12px;padding:9px}
+ .layout{display:block}
+ aside{display:flex;min-height:0;overflow:auto;padding:7px;border:0}
+ aside button{flex:0 0 auto;width:auto;font-size:12px;padding:9px}
+ aside button span{font-size:14px}
+ main{padding:15px 12px}
+ .grid{grid-template-columns:1fr}
+ .banner{padding:24px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo"><span>▶</span> Aprende+</div>
+  <div class="search">
+    <input id="search" placeholder="Pesquisar tutoriais...">
+    <button onclick="render()">⌕</button>
+  </div>
+  <button class="profile" onclick="showPage('account')">👤 Perfil</button>
+</header>
+
+<div class="layout">
+
+<aside>
+  <button class="active" data-page="home" onclick="showPage('home')"><span>⌂</span> Início</button>
+  <button data-page="home" onclick="showPage('home');document.getElementById('featured').scrollIntoView()"><span>▶</span> Vídeos</button>
+  <button data-page="favorites" onclick="showPage('favorites')"><span>★</span> Favoritos</button>
+  <button data-page="publish" onclick="showPage('publish')"><span>＋</span> Publicar</button>
+  <button data-page="account" onclick="showPage('account')"><span>👤</span> Minha conta</button>
+</aside>
+
+<main>
+
+<!-- INÍCIO -->
+<section id="page-home">
+
+  <div class="banner">
+    <h1>Aprenda algo novo hoje!</h1>
+    <p>Bem-vindo ao Aprende+. Descubra tutoriais de tecnologia,
+    games, edição, estudos, ciência e muito mais.</p>
+  </div>
+
+  <h2 id="featured">▶ Primeiro vídeo</h2>
+
+  <div class="featured">
+    <video id="firstVideo" controls preload="metadata">
+      <source src="primeiro-video.mp4" type="video/mp4">
+    </video>
+    <h3>Nosso primeiro tutorial</h3>
+    <p>O vídeo enviado para iniciar o Aprende+.</p>
+    <div class="actions">
+      <button class="btn" onclick="likeFirst()">👍 <span id="firstLikes">0</span></button>
+      <button class="btn" onclick="favoriteFirst()">☆ Favoritar</button>
+    </div>
+    <div id="firstComments" class="comments">
+      <h3>Comentários</h3>
+      <div id="firstCommentList"></div>
+      <form class="form" onsubmit="commentFirst(event)">
+        <textarea id="firstCommentText" placeholder="Escreva um comentário..." required></textarea>
+        <button class="btn red">Enviar comentário</button>
+      </form>
+    </div>
+  </div>
+
+  <h2>Explore os tutoriais</h2>
+
+  <div class="categories" id="categories">
+    <button class="active" onclick="setCategory('Todos',this)">Tudo</button>
+    <button onclick="setCategory('Tecnologia',this)">Tecnologia</button>
+    <button onclick="setCategory('Games',this)">Games</button>
+    <button onclick="setCategory('Celular',this)">Celular</button>
+    <button onclick="setCategory('Edição',this)">Edição</button>
+    <button onclick="setCategory('Estudos',this)">Estudos</button>
+    <button onclick="setCategory('Criatividade',this)">Criatividade</button>
+    <button onclick="setCategory('Ciência',this)">Ciência</button>
+    <button onclick="setCategory('Culinária',this)">Culinária</button>
+    <button onclick="setCategory('Dia a dia',this)">Dia a dia</button>
+  </div>
+
+  <div id="videoGrid" class="grid"></div>
+  <div id="empty" class="empty hidden">Nenhum tutorial encontrado.</div>
+</section>
+
+<!-- ASSISTIR -->
+<section id="page-watch" class="hidden">
+  <button class="btn" onclick="showPage('home')">← Voltar</button>
+  <div class="featured" style="margin-top:18px">
+    <video id="watchVideo" controls></video>
+    <h2 id="watchTitle"></h2>
+    <p id="watchDescription"></p>
+    <p class="muted" id="watchCategory"></p>
+    <div class="actions">
+      <button class="btn" id="watchLike">👍 Curtir</button>
+      <button class="btn" id="watchFavorite">☆ Favoritar</button>
+    </div>
+    <div class="comments">
+      <h3>Comentários</h3>
+      <div id="watchComments"></div>
+      <form class="form" onsubmit="sendComment(event)">
+        <textarea id="commentText" placeholder="Escreva seu comentário..." required></textarea>
+        <button class="btn red">Comentar</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FAVORITOS -->
+<section id="page-favorites" class="hidden">
+  <h2>★ Seus favoritos</h2>
+  <div id="favoriteGrid" class="grid"></div>
+  <p id="noFavorites" class="empty hidden">Você ainda não tem favoritos.</p>
+</section>
+
+<!-- PUBLICAR -->
+<section id="page-publish" class="hidden">
+  <h2>＋ Publicar um tutorial</h2>
+  <div class="panel">
+    <p class="notice">
+      As publicações ficam armazenadas neste navegador e neste computador.
+      Não são enviadas automaticamente para a internet.
+    </p>
+    <form class="form" id="publishForm">
+      <label>Título do vídeo</label>
+      <input id="videoTitle" maxlength="100" placeholder="Ex.: Como editar vídeos" required>
+
+      <label>Descrição</label>
+      <textarea id="videoDescription" maxlength="1000" placeholder="Conte o que será ensinado..." required></textarea>
+
+      <label>Categoria</label>
+      <select id="videoCategory">
+        <option>Tecnologia</option>
+        <option>Games</option>
+        <option>Celular</option>
+        <option>Edição</option>
+        <option>Estudos</option>
+        <option>Criatividade</option>
+        <option>Ciência</option>
+        <option>Culinária</option>
+        <option>Dia a dia</option>
+      </select>
+
+      <label>Arquivo de vídeo (MP4, WebM ou outro formato compatível)</label>
+      <input id="videoFile" type="file" accept="video/*" required>
+
+      <button class="btn red">Publicar tutorial</button>
+    </form>
+    <p id="publishStatus" class="notice hidden"></p>
+  </div>
+</section>
+
+<!-- CONTA -->
+<section id="page-account" class="hidden">
+  <h2>👤 Minha conta</h2>
+  <div class="panel">
+    <div class="account">
+      <div class="avatar" id="avatar">A</div>
+      <div>
+        <h3 id="accountName">Visitante</h3>
+        <p class="muted">Perfil neste dispositivo</p>
+      </div>
+    </div>
+
+    <form class="form" id="profileForm">
+      <label>Como você quer ser chamado?</label>
+      <input id="profileName" maxlength="35" placeholder="Seu nome ou apelido" required>
+      <button class="btn red">Salvar perfil</button>
+    </form>
+
+    <p class="notice">
+      Este perfil é local e serve para identificar comentários.
+      Ainda não é uma conta online protegida por senha.
+    </p>
+  </div>
+</section>
+
+</main>
+</div>
+
+<footer>Aprende+ © 2026 · Descubra, aprenda e compartilhe conhecimento.</footer>
+
+<script>
+/* DADOS LOCAIS */
+
+const KEY = "aprendemais_database_v2";
+let db = JSON.parse(localStorage.getItem(KEY) || "{}");
+
+db.videos ||= [];
+db.likes ||= {};
+db.favorites ||= [];
+db.comments ||= {};
+db.firstComments ||= [];
+db.profile ||= "Visitante";
+
+let currentCategory = "Todos";
+let currentVideo = null;
+
+function save(){
+  localStorage.setItem(KEY,JSON.stringify(db));
+}
+
+function escapeHTML(text){
+  return String(text).replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&#039;"
+  })[c]);
+}
+
+function userName(){
+  return db.profile || "Visitante";
+}
+
+/* NAVEGAÇÃO */
+
+function showPage(page){
+  document.querySelectorAll("main > section").forEach(s=>s.classList.add("hidden"));
+  document.getElementById("page-"+page).classList.remove("hidden");
+
+  document.querySelectorAll("aside button").forEach(b=>{
+    b.classList.toggle("active",b.dataset.page===page);
+  });
+
+  if(page==="favorites") renderFavorites();
+  if(page==="account") renderAccount();
+
+  window.scrollTo(0,0);
+}
+
+/* CATEGORIAS E PESQUISA */
+
+function setCategory(category,button){
+  currentCategory=category;
+  document.querySelectorAll(".categories button").forEach(b=>b.classList.remove("active"));
+  button.classList.add("active");
+  render();
+}
+
+document.getElementById("search").addEventListener("input",render);
+
+function allVideos(){
+  return [
+    {
+      id:"first",
+      title:"Nosso primeiro tutorial",
+      description:"O vídeo enviado para iniciar o Aprende+.",
+      category:"Destaque",
+      first:true
+    },
+    ...db.videos
+  ];
+}
+
+function render(){
+  const q=document.getElementById("search").value.toLowerCase();
+  const grid=document.getElementById("videoGrid");
+  grid.innerHTML="";
+
+  const list=allVideos().filter(v=>{
+    const categoryOK=currentCategory==="Todos" || v.category===currentCategory;
+    const searchOK=(v.title+" "+v.description+" "+v.category).toLowerCase().includes(q);
+    return categoryOK && searchOK;
+  });
+
+  list.forEach(v=>{
+    const card=document.createElement("article");
+    card.className="card";
+
+    const thumb=document.createElement("div");
+    thumb.className="thumb";
+    thumb.textContent="▶";
+
+    if(!v.first){
+      thumb.textContent="🎬";
+    }
+
+    const title=document.createElement("h3");
+    title.textContent=v.title;
+
+    const info=document.createElement("p");
+    info.textContent="Aprende+ · "+v.category;
+
+    card.append(thumb,title,info);
+    card.addEventListener("click",()=>openVideo(v.id));
+    grid.appendChild(card);
+  });
+
+  document.getElementById("empty").classList.toggle("hidden",list.length!==0);
+}
+
+/* ABRIR VÍDEO */
+
+function openVideo(id){
+  const v=allVideos().find(x=>x.id===id);
+  if(!v)return;
+
+  currentVideo=id;
+  const player=document.getElementById("watchVideo");
+
+  if(v.first){
+    player.src="primeiro-video.mp4";
+  }else{
+    const url=URL.createObjectURL(v.file);
+    player.src=url;
+  }
+
+  document.getElementById("watchTitle").textContent=v.title;
+  document.getElementById("watchDescription").textContent=v.description;
+  document.getElementById("watchCategory").textContent="Categoria: "+v.category;
+
+  document.getElementById("watchLike").onclick=()=>likeVideo(id);
+  document.getElementById("watchFavorite").onclick=()=>favoriteVideo(id);
+
+  renderComments(id);
+  showPage("watch");
+}
+
+/* CURTIDAS */
+
+function likeVideo(id){
+  db.likes[id]=(db.likes[id]||0)+1;
+  save();
+  if(id==="first"){
+    document.getElementById("firstLikes").textContent=db.likes.first;
+  }
+  if(currentVideo===id){
+    document.getElementById("watchLike").textContent="👍 Curtido ("+db.likes[id]+")";
+  }
+}
+
+function likeFirst(){
+  likeVideo("first");
+}
+
+/* FAVORITOS */
+
+function favoriteVideo(id){
+  if(db.favorites.includes(id)){
+    db.favorites=db.favorites.filter(x=>x!==id);
+  }else{
+    db.favorites.push(id);
+  }
+  save();
+
+  if(currentVideo===id){
+    document.getElementById("watchFavorite").textContent=
+      db.favorites.includes(id)?"★ Salvo":"☆ Favoritar";
+  }
+}
+
+function favoriteFirst(){
+  favoriteVideo("first");
+  renderFirstFavorite();
+}
+
+function renderFirstFavorite(){
+  document.querySelector(".featured .actions button:nth-child(2)").textContent=
+    db.favorites.includes("first")?"★ Favoritado":"☆ Favoritar";
+}
+
+/* COMENTÁRIOS */
+
+function renderComments(id){
+  const box=document.getElementById("watchComments");
+  box.innerHTML="";
+  (db.comments[id]||[]).forEach(c=>{
+    const item=document.createElement("div");
+    item.className="comment";
+    const name=document.createElement("strong");
+    name.textContent=c.name;
+    const text=document.createElement("p");
+    text.textContent=c.text;
+    item.append(name,text);
+    box.append(item);
+  });
+}
+
+function sendComment(event){
+  event.preventDefault();
+  const text=document.getElementById("commentText").value.trim();
+  if(!text||!currentVideo)return;
+
+  db.comments[currentVideo]||=[];
+  db.comments[currentVideo].push({name:userName(),text});
+  save();
+
+  document.getElementById("commentText").value="";
+  renderComments(currentVideo);
+}
+
+function commentFirst(event){
+  event.preventDefault();
+  const text=document.getElementById("firstCommentText").value.trim();
+  if(!text)return;
+
+  db.firstComments.push({name:userName(),text});
+  save();
+  document.getElementById("firstCommentText").value="";
+  renderFirstComments();
+}
+
+function renderFirstComments(){
+  const box=document.getElementById("firstCommentList");
+  box.innerHTML="";
+  db.firstComments.forEach(c=>{
+    const item=document.createElement("div");
+    item.className="comment";
+    const name=document.createElement("strong");
+    name.textContent=c.name;
+    const text=document.createElement("p");
+    text.textContent=c.text;
+    item.append(name,text);
+    box.append(item);
+  });
+}
+
+/* PUBLICAÇÃO DE VÍDEOS */
+
+const DB_NAME="AprendeMaisFiles";
+let fileDB;
+
+function openFileDB(){
+  return new Promise((resolve,reject)=>{
+    const request=indexedDB.open(DB_NAME,1);
+
+    request.onupgradeneeded=()=>{
+      request.result.createObjectStore("videos");
+    };
+
+    request.onsuccess=()=>{
+      fileDB=request.result;
+      resolve(fileDB);
+    };
+
+    request.onerror=()=>reject(request.error);
+  });
+}
+
+function storeFile(id,file){
+  return new Promise((resolve,reject)=>{
+    const tx=fileDB.transaction("videos","readwrite");
+    tx.objectStore("videos").put(file,id);
+    tx.oncomplete=resolve;
+    tx.onerror=()=>reject(tx.error);
+  });
+}
+
+function getFile(id){
+  return new Promise((resolve,reject)=>{
+    const tx=fileDB.transaction("videos","readonly");
+    const request=tx.objectStore("videos").get(id);
+    request.onsuccess=()=>resolve(request.result);
+    request.onerror=()=>reject(request.error);
+  });
+}
+
+document.getElementById("publishForm").addEventListener("submit",async event=>{
+  event.preventDefault();
+
+  const file=document.getElementById("videoFile").files[0];
+  if(!file)return;
+
+  if(!file.type.startsWith("video/")){
+    alert("Escolha um arquivo de vídeo válido.");
+    return;
+  }
+
+  const id="video_"+Date.now()+"_"+Math.random().toString(36).slice(2,8);
+
+  try{
+    await storeFile(id,file);
+
+    db.videos.push({
+      id,
+      title:document.getElementById("videoTitle").value.trim(),
+      description:document.getElementById("videoDescription").value.trim(),
+      category:document.getElementById("videoCategory").value
+    });
+
+    save();
+    event.target.reset();
+
+    const status=document.getElementById("publishStatus");
+    status.textContent="Tutorial publicado neste dispositivo!";
+    status.classList.remove("hidden");
+
+    render();
+  }catch(error){
+    alert("Não foi possível guardar o vídeo. Verifique o espaço disponível no computador.");
+  }
+});
+
+/* FAVORITOS */
+
+async function renderFavorites(){
+  const grid=document.getElementById("favoriteGrid");
+  grid.innerHTML="";
+  let count=0;
+
+  for(const id of db.favorites){
+    const v=allVideos().find(x=>x.id===id);
+    if(!v)continue;
+
+    count++;
+    const card=document.createElement("article");
+    card.className="card";
+
+    const thumb=document.createElement("div");
+    thumb.className="thumb";
+    thumb.textContent="▶";
+
+    const title=document.createElement("h3");
+    title.textContent=v.title;
+
+    const info=document.createElement("p");
+    info.textContent=v.category;
+
+    card.append(thumb,title,info);
+    card.onclick=()=>openVideo(id);
+    grid.append(card);
+  }
+
+  document.getElementById("noFavorites").classList.toggle("hidden",count>0);
+}
+
+/* PERFIL */
+
+function renderAccount(){
+  document.getElementById("accountName").textContent=userName();
+  document.getElementById("profileName").value=userName();
+  document.getElementById("avatar").textContent=userName().charAt(0).toUpperCase();
+}
+
+document.getElementById("profileForm").addEventListener("submit",event=>{
+  event.preventDefault();
+  const name=document.getElementById("profileName").value.trim();
+  if(!name)return;
+
+  db.profile=name;
+  save();
+  renderAccount();
+  alert("Perfil salvo!");
+});
+
+/* INICIAR */
+
+async function init(){
+  try{
+    await openFileDB();
+
+    // Recupera os arquivos dos vídeos publicados.
+    for(const v of db.videos){
+      v.file=await getFile(v.id);
+    }
+
+    db.videos=db.videos.filter(v=>v.file);
+    save();
+
+  }catch(error){
+    console.warn("Armazenamento de vídeos indisponível:",error);
+  }
+
+  document.getElementById("firstLikes").textContent=db.likes.first||0;
+  renderFirstComments();
+  renderFirstFavorite();
+  render();
+}
+
+init();
+</script>
+
+</body>
+</html>
